@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deploy
+  name: flask-api-deploy
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: web
+      app: flask-api
   template:
     metadata:
       labels:
-        app: web
+        app: flask-api
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: flask-api
+        image: temeteke/flask-api
         resources:
           requests:
             memory: 64Mi
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
+  name: flask-api-service
 spec:
   selector:
-    app: web
+    app: flask-api
   ports:
   - protocol: TCP
     port: 80
